@@ -1,0 +1,29 @@
+GridLAB-D Climate Data
+----------------------
+
+$Id: README 4728 2014-06-29 22:38:23Z dchassin $
+
+GridLAB-D's climate module supports TMY2 and CSV weather data files.
+
+USA
+---
+
+TMY data files are combined into ZIP files by state. Extract the files
+for the state you need and place them in your working folder or one of
+the GridLAB-D support folders.
+
+Canada
+------
+
+Note: As of June 2014 the Canadian TMY files are not working properly.
+
+The data files are combined into a single ZIP file. Extract the files
+and copy the ones you need to your working folder or one of the
+GridLAB-D support folders.
+
+Other Countries
+---------------
+
+You may have to search online for TMY data files for your country.
+If you find TMY3 data files, try using the TMY32TMY2 conversion
+utility.  You will need an ANSI "C" compiler to build the utility.
