@@ -1,0 +1,9 @@
+Status as of 6/29/14
+--------------------
+Work in progress
+
+At this point the tool that extracts the data can't be compiled
+using gfortran (kind of expected that).  It's not even clear 
+that the output is going to be in the right format.
+
+DPC

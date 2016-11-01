@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# find source of data
+SRC=http://doe2.com/Download/Weather/CTMY2
+
+# get file list
+if [ ! -r filelist.txt ]; then
+	echo -n "Getting file list..."
+	wget -q $SRC/1allfile.txt -O filelist.txt
+	echo "done"
+fi
+
+# process file list
+UNAME=$(cut -c1-12 filelist.txt)
+mkdir -p bin
+for u in $UNAME; do
+	url=http://doe2.com/Download/Weather/CTMY2/$(echo $u|tr "[A-Z]" "[a-z]").bin
+	cityprov=$(grep "^$u" filelist.txt | cut -c13-32 | sed -re 's/[^A-Za-z]+/_/g;s/_$//g;s/_CA$//')
+	city=$(echo $cityprov | sed -re 's/_[A-Za-z]+$//')
+	prov=${cityprov##*_}
+	case $prov in
+	Alta) prov=AB;;
+	Man) prov=MB;;
+	NFLD) prov=NL;;
+	NF) prov=NL;;
+	NWT) prov=NT;;
+	Ont) prov=ON;;
+	PEI) prov=PE;;
+	YK) prov=YT;;
+	Que) prov=QC;;
+	Sas) prov=SK;;
+	AB|BC|MB|NB|NL|NT|NS|NU|ON|PE|QC|SK|YT) # ok
+		;;
+	*) echo "$prov does not comply with standard Canadian postal abbrevations"
+		;;
+	esac
+	bin="bin/$prov-$city.bin"
+	if [ ! -r $bin ]; then
+		echo -n "Getting $url..."
+		wget -q $url -O $bin
+		echo "done"
+	fi
+done
+
+# convert bin to tmy2
+
+# compress zip file
+zip Canada.zip *.tmy2 
