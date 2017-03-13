@@ -3,7 +3,7 @@ GridLAB-D Climate Data
 
 $Id: README 4728 2014-06-29 22:38:23Z dchassin $
 
-GridLAB-D's climate module supports TMY2 and CSV weather data files.
+GridLAB-D's climate module supports TMY2, TMY3 and CSV weather data files.
 
 USA
 ---
